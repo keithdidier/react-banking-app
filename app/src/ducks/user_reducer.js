@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 //SET INITIAL STATE
 const initialState = {
     user: {}
@@ -10,7 +11,7 @@ const GET_USER_INFO = "GET_USER_INFO";
 //ACTION CREATORS
 export function getUserInfo() {
     const userInfo = axios.get('/auth/me').then( res => {
-        return res.data
+        return res.data[0]
     })
     return {
         type: GET_USER_INFO,

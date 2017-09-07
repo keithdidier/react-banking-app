@@ -31,7 +31,6 @@ passport.use(new Auth0Strategy({
     callbackURL: process.env.AUTH_CALLBACK
 }, function(accessToken, refreshToken, extraParams, profile, done) {
     
-    
     const db = app.get('db');
 
     db.find_user(profile.id).then( user => {
@@ -55,10 +54,10 @@ passport.serializeUser(function(user, done){
     done(null, user);
 })
 
-passport.deserializeUser(function(user, doen){
+passport.deserializeUser(function(user, done){
    
-    app.get('db').find_session_user(user[0].id).then( user => {
-        return done(null, user[0]);
+    app.get('db').find_session_user(user.id).then( user => {
+        return done(null, user);
     })
 })
 
